@@ -1,4 +1,4 @@
-def calculate_fare(distance, vehicle_type):
+def calculate_fare(distance, vehicle_type, is_peak):
     # Base fare and rates
     base_fare = 0
     rate_per_km = 0
@@ -15,8 +15,15 @@ def calculate_fare(distance, vehicle_type):
     else:
         return "Invalid Vehicle Type"
 
-    fare = base_fare + (distance * rate_per_km)
-    return fare
+    # Calculate basic fare
+    total_fare = base_fare + (distance * rate_per_km)
+
+    # Peak hour surcharge (e.g., 20% extra)
+    if is_peak:
+        total_fare = total_fare * 1.20
+        print("Peak hour surcharge applied (20%)")
+
+    return total_fare
 
 def main():
     print("--- Grab Fare Calculator ---")
@@ -25,7 +32,6 @@ def main():
         try:
             # Inputs
             distance = float(input("Enter distance (km): "))
-            vehicle_type = input("Enter vehicle type (1 for GrabCar, 2 for GrabBike, 3 for GrabTaxi): ")
             if distance <= 0:
                 print("Distance must be greater than 0.")
                 continue
@@ -33,8 +39,14 @@ def main():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-    fare = calculate_fare(distance, vehicle_type)
-    print(f"The calculated fare is: ${fare:.2f}")
+    vehicle_type = input("Enter vehicle type (1 for GrabCar, 2 for GrabBike, 3 for GrabTaxi): ")
+    
+    peak_input = input("Is it Peak Hour? (y/n): ").lower()
+    is_peak = peak_input == 'y'
+
+    fare = calculate_fare(distance, vehicle_type, is_peak)
+    
+    print(f"The calculated fare is: RM{fare:.2f}")
 
 if __name__ == "__main__":
     main()
