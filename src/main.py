@@ -18,3 +18,7 @@ else:
 
 print("You selected option:", ride_name)
 
+distance = float(input("Enter travel distance (km): "))
+
+print("Distance:", distance, "km")
+
