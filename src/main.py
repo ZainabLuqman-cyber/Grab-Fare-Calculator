@@ -31,3 +31,6 @@ distance = float(input("Enter travel distance (km): "))
 print("Distance:", distance, "km")
 print("Base Fare: RM", base_fare)
 print("Rate per km: RM", per_km_)
+
+estimated_fare = base_fare + (per_km_ * distance)
+print("Estimated Fare: RM", round(estimated_fare, 2))
