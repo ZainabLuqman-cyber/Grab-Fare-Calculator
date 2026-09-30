@@ -53,3 +53,13 @@ print("Time period:", period_name)
 estimated_fare = base_fare + (per_km_ * distance)
 estimated_fare = estimated_fare * peak_multiplier
 print("Estimated Fare: RM", round(estimated_fare, 2))
+
+passengers = int(input("Enter number of passengers: "))
+if passengers > 4:
+    print("Additional charge for extra passengers.")
+    extra_passengers = passengers - 4
+    extra_charge = extra_passengers * 2.00
+    estimated_fare += extra_charge
+    print("Extra charge for", extra_passengers, "extra passengers: RM", round(extra_charge, 2))
+
+print("Passenger charge: RM", round(estimated_fare, 2))
