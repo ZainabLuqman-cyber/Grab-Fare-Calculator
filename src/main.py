@@ -32,5 +32,24 @@ print("Distance:", distance, "km")
 print("Base Fare: RM", base_fare)
 print("Rate per km: RM", per_km_)
 
+print()
+print("1. Peak Hours")
+print("2. Off-Peak Hours")
+
+time_type = int(input("Enter your time period: "))
+
+if time_type == 1:
+    peak_multiplier = 1.20
+    period_name = "Peak Hours"
+elif time_type == 2:
+    peak_multiplier = 1.00
+    period_name = "Off-Peak Hours"
+else:
+    peak_multiplier = 1.00
+    period_name = "Off-Peak Hours"
+
+print("Time period:", period_name)
+
 estimated_fare = base_fare + (per_km_ * distance)
+estimated_fare = estimated_fare * peak_multiplier
 print("Estimated Fare: RM", round(estimated_fare, 2))
