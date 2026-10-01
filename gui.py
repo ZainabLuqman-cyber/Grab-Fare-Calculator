@@ -105,16 +105,21 @@ def calculate_fare(distance, vehicle_type, is_peak, passengers):
     # Calculate basic fare
     total_fare = base_fare + (distance * rate_per_km)
 
+    messages = []
+
     # Peak hour surcharge (e.g., 20% extra)
     if is_peak:
         total_fare = total_fare * 1.20
+        messages.append("Peak hour surcharge applied (20%)")
 
     # Passenger surcharge (e.g., RM1.00 per additional passenger)
     if passengers > 1:
         extra_passenger_fare = (passengers - 1) * 1.00
         total_fare += extra_passenger_fare
+        messages.append(f"Additional passenger surcharge applied (RM1.00 per extra passenger)")
+        messages.append(f"Extra passenger fee applied: RM{extra_passenger_fare:.2f}")
 
-    return total_fare   
+    return total_fare, messages
 
 def calculate():
     try:
@@ -125,8 +130,9 @@ def calculate():
         if distance < 0 or passengers < 1 or not vehicle_type:
             raise ValueError
 
-        fare = calculate_fare(distance, vehicle_type, peak_var.get(), passengers)
+        fare, messages = calculate_fare(distance, vehicle_type, peak_var.get(), passengers)
         result_label.config(text=f"Estimated Fare: RM {fare:.2f}")
+        message_label.config(text="\n".join(messages))
     except ValueError:
         result_label.config(text="Please enter valid fare details.")
 
@@ -136,6 +142,16 @@ result_label = tk.Label(
     font=("Arial", 12, "bold"),
 )
 result_label.pack(pady=5)
+
+message_label = tk.Label(
+    window,
+    text="",
+    font=("Arial", 10),
+    wraplength=400,
+    justify="center"
+)
+
+message_label.pack(pady=5)
 
 calculate_button = tk.Button(
     window,
