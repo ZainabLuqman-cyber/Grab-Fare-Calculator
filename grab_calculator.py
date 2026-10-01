@@ -5,13 +5,13 @@ def calculate_fare(distance, vehicle_type, is_peak, passengers):
 
     if vehicle_type == "1": # GrabCar
         base_fare = 5.00
-        rate_per_km = 1.50
-    elif vehicle_type == "2": # GrabCarPlus
-        base_fare = 2.00
-        rate_per_km = 0.80
-    elif vehicle_type == "3": # GrabCarPremium
-        base_fare = 4.00
         rate_per_km = 1.20
+    elif vehicle_type == "2": # GrabCarPlus
+        base_fare = 7.00
+        rate_per_km = 1.50
+    elif vehicle_type == "3": # GrabCarPremium
+        base_fare = 10.00
+        rate_per_km = 2.00
     else:
         return "Invalid Vehicle Type"
 
@@ -51,6 +51,17 @@ def get_vehicle_choice():
             return choice
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
+
+def get_distance():
+    while True:
+        try:
+            distance = float(input("Enter distance (km): "))
+            if distance <= 0:
+                print("Distance must be greater than 0.")
+                continue
+            return distance
+        except ValueError:
+            print("Invalid input. Please enter a number.")
     
 def main():
     print_header()
@@ -58,17 +69,7 @@ def main():
     show_vehicle_menu()
     vehicle_type = get_vehicle_choice()
 
-    while True:
-        try:
-            # Inputs
-            distance = float(input("Enter distance (km): "))
-            if distance <= 0:
-                print("Distance must be greater than 0.")
-                continue
-            break
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-
+    distance = get_distance()
    
     peak_input = input("Is it Peak Hour? (y/n): ").lower()
     is_peak = peak_input == 'y'
@@ -76,6 +77,7 @@ def main():
     try:
         passengers = int(input("Enter number of passengers: "))
     except ValueError:
+        print("Invalid input. Defaulting to 1 passenger.")
         passengers = 1
 
     fare = calculate_fare(distance, vehicle_type, is_peak, passengers)
