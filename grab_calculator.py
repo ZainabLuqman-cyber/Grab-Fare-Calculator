@@ -6,10 +6,10 @@ def calculate_fare(distance, vehicle_type, is_peak, passengers):
     if vehicle_type == "1": # GrabCar
         base_fare = 5.00
         rate_per_km = 1.50
-    elif vehicle_type == "2": # GrabBike
+    elif vehicle_type == "2": # GrabCarPlus
         base_fare = 2.00
         rate_per_km = 0.80
-    elif vehicle_type == "3": # GrabTaxi
+    elif vehicle_type == "3": # GrabCarPremium
         base_fare = 4.00
         rate_per_km = 1.20
     else:
@@ -32,9 +32,32 @@ def calculate_fare(distance, vehicle_type, is_peak, passengers):
 
     return total_fare
 
-def main():
-    print("--- Grab Fare Calculator ---")
+def print_header():
+    print("=" * 40)
+    print("      GRAB FARE CALCULATOR (MALAYSIA)      ")
+    print("=" * 40)
+
+def show_vehicle_menu():
+    print("\n--- Select Vehicle Type ---")
+    print("1. GrabCar")
+    print("2. GrabCar Plus")
+    print("3. GrabCar Premium")
+    print("---------------------------")
+
+def get_vehicle_choice():
+    while True:
+        choice = input("Enter your choice (1-3): ")
+        if choice in ["1", "2", "3"]:
+            return choice
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
     
+def main():
+    print_header()
+    
+    show_vehicle_menu()
+    vehicle_type = get_vehicle_choice()
+
     while True:
         try:
             # Inputs
@@ -46,8 +69,7 @@ def main():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-    vehicle_type = input("Enter vehicle type (1 for GrabCar, 2 for GrabBike, 3 for GrabTaxi): ")
-    
+   
     peak_input = input("Is it Peak Hour? (y/n): ").lower()
     is_peak = peak_input == 'y'
 
