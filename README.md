@@ -1,4 +1,4 @@
-README.md
+
 # Grab Fare Calculator
 Python based Grab Fare Calculator developed as part of the LDCW6123 Fundamentals of Digital Competence for Programmer assignment.
 
