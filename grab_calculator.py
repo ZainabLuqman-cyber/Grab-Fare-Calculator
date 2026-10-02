@@ -1,3 +1,6 @@
+# Grab Fare Calculator Logic & CLI-based
+# Programmed by: Zainab & Danial Haris
+
 def calculate_fare(distance, vehicle_type, is_peak, passengers):
     # Base fare and rates
     base_fare = 0

@@ -1,3 +1,6 @@
+# Grab Fare Calculator GUI
+# Programmed by: Danial Haris & Zainab
+
 import tkinter as tk
 from tkinter import ttk
 from grab_calculator import calculate_fare   # <-- Import the shared function
