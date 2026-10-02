@@ -7,7 +7,7 @@ window = tk.Tk()
 
 # Window title
 window.title("Grab Fare Calculator")
-window.geometry("500x600")
+window.geometry("500x700")
 window.resizable(False, False)
 
 title = tk.Label(
@@ -114,7 +114,6 @@ message_label = tk.Label(
     wraplength=400,
     justify="center"
 )
-
 message_label.pack(pady=5)
 
 calculate_button = tk.Button(
