@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-
+from grab_calculator import calculate_fare   # <-- Import the shared function
 
 # Create the main window
 window = tk.Tk()
@@ -85,49 +85,13 @@ passenger_choice = ttk.Combobox(
 )
 passenger_choice.pack()
 
-def calculate_fare(distance, vehicle_type, is_peak, passengers):
-    # Base fare and rates
-    base_fare = 0
-    rate_per_km = 0
-
-    if vehicle_type == "GrabCar":
-        base_fare = 5.00
-        rate_per_km = 1.20
-    elif vehicle_type == "GrabCar Plus":
-        base_fare = 7.00
-        rate_per_km = 1.50
-    elif vehicle_type == "GrabCar Premium":
-        base_fare = 10.00
-        rate_per_km = 2.00
-    else:
-        return "Invalid Vehicle Type"
-
-    # Calculate basic fare
-    total_fare = base_fare + (distance * rate_per_km)
-
-    messages = []
-
-    # Peak hour surcharge (e.g., 20% extra)
-    if is_peak:
-        total_fare = total_fare * 1.20
-        messages.append("Peak hour surcharge applied (20%)")
-
-    # Passenger surcharge (e.g., RM1.00 per additional passenger)
-    if passengers > 1:
-        extra_passenger_fare = (passengers - 1) * 1.00
-        total_fare += extra_passenger_fare
-        messages.append(f"Additional passenger surcharge applied (RM1.00 per extra passenger)")
-        messages.append(f"Extra passenger fee applied: RM{extra_passenger_fare:.2f}")
-
-    return total_fare, messages
-
 def calculate():
     try:
         distance = float(distance_entry.get())
         passengers = int(passenger_choice.get())
         vehicle_type = vehicle_choice.get()
 
-        if distance < 0 or passengers < 1 or not vehicle_type:
+        if distance <= 0 or passengers < 1 or not vehicle_type:
             raise ValueError
 
         fare, messages = calculate_fare(distance, vehicle_type, peak_var.get(), passengers)
